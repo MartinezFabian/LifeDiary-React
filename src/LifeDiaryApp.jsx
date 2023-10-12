@@ -1,7 +1,9 @@
+import { AppRouter } from './router/AppRouter';
+
 export const LifeDiaryApp = () => {
   return (
     <>
-      <h1>LifeDiaryApp</h1>
+      <AppRouter></AppRouter>
     </>
   );
 };

@@ -3,9 +3,12 @@ import ReactDOM from 'react-dom/client';
 
 import './styles.css';
 import { LifeDiaryApp } from './LifeDiaryApp';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LifeDiaryApp></LifeDiaryApp>
+    <BrowserRouter>
+      <LifeDiaryApp></LifeDiaryApp>
+    </BrowserRouter>
   </React.StrictMode>
 );

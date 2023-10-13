@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
 import './styles.css';
 import { LifeDiaryApp } from './LifeDiaryApp';
-import { BrowserRouter } from 'react-router-dom';
+import { AppTheme } from './theme/AppTheme';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <LifeDiaryApp></LifeDiaryApp>
+      <AppTheme>
+        <LifeDiaryApp></LifeDiaryApp>
+      </AppTheme>
     </BrowserRouter>
   </React.StrictMode>
 );

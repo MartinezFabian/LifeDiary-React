@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import { CssBaseline, createTheme } from '@mui/material';
+import { red } from '@mui/material/colors';
 
 export const AppTheme = ({ children }) => {
   const theme = createTheme({
@@ -9,6 +10,9 @@ export const AppTheme = ({ children }) => {
       },
       secondary: {
         main: '#543884',
+      },
+      error: {
+        main: red.A700,
       },
     },
   });

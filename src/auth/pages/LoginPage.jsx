@@ -78,7 +78,12 @@ export const LoginPage = () => {
           </Grid>
 
           <Grid container direction="row" justifyContent="end" marginTop={2}>
-            <Link component={LinkReactRouter} to={'/auth/register'} underline="none">
+            <Link
+              component={LinkReactRouter}
+              color="inherit"
+              underline="none"
+              to={'/auth/register'}
+            >
               Create account
             </Link>
           </Grid>

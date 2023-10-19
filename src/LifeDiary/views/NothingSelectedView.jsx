@@ -9,7 +9,7 @@ export const NothingSelectedView = () => {
       direction="column"
       alignItems="center"
       justifyContent="center"
-      sx={{ minHeight: '94vh', backgroundColor: 'grey.main' }}
+      sx={{ minHeight: '94vh' }}
     >
       <Grid item xs={12}>
         <Typography variant="h5">Add a new entry</Typography>

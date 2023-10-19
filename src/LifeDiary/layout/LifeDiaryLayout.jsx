@@ -25,7 +25,13 @@ export const LifeDiaryLayout = ({ children }) => {
 
       <Box
         component="main"
-        sx={{ flexGrow: 1, padding: 0, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{
+          flexGrow: 1,
+          padding: 0,
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          minHeight: '100vh',
+          backgroundColor: 'grey.main',
+        }}
       >
         <Toolbar />
 

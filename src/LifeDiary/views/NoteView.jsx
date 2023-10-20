@@ -1,5 +1,6 @@
 import { Save } from '@mui/icons-material';
 import { Button, Grid, TextField, Typography } from '@mui/material';
+import { ImageGallery } from '../components/ImageGallery';
 
 export const NoteView = () => {
   return (
@@ -44,6 +45,8 @@ export const NoteView = () => {
           sx={{ backgroundColor: '#fff', marginBottom: 1 }}
         />
       </Grid>
+
+      <ImageGallery></ImageGallery>
     </Grid>
   );
 };

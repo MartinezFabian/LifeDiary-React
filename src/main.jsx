@@ -4,14 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './styles.css';
 import { LifeDiaryApp } from './LifeDiaryApp';
-import { AppTheme } from './theme/AppTheme';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <AppTheme>
+    <Provider store={store}>
+      <BrowserRouter>
         <LifeDiaryApp></LifeDiaryApp>
-      </AppTheme>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );

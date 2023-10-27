@@ -1,3 +1,7 @@
+import { useState } from 'react';
+
+import { Link as LinkReactRouter } from 'react-router-dom';
+
 import {
   Button,
   FormControl,
@@ -12,12 +16,26 @@ import {
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-import { useState } from 'react';
-import { Link as LinkReactRouter } from 'react-router-dom';
-
 import { AuthLayout } from '../layout/AuthLayout';
 
 export const RegisterPage = () => {
+  const [formState, setFormState] = useState({ fullName: '', email: '', password: '' });
+
+  const onFormChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formState);
+  };
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -28,10 +46,17 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title="Create account">
-      <form>
+      <form onSubmit={onFormSubmit}>
         <Grid container>
           <Grid item xs={12} sx={{ marginTop: 2 }}>
-            <TextField label="Full name" type="text" fullWidth />
+            <TextField
+              label="Full name"
+              type="text"
+              fullWidth
+              name="fullName"
+              value={formState.fullName}
+              onChange={onFormChange}
+            />
           </Grid>
 
           <Grid item xs={12} sx={{ marginTop: 2 }}>
@@ -41,6 +66,9 @@ export const RegisterPage = () => {
               autoComplete="username"
               fullWidth
               placeholder="example@email.com"
+              name="email"
+              value={formState.email}
+              onChange={onFormChange}
             />
           </Grid>
 
@@ -52,6 +80,9 @@ export const RegisterPage = () => {
                 id="outlined-adornment-password"
                 autoComplete="current-password"
                 type={showPassword ? 'text' : 'password'}
+                name="password"
+                value={formState.password}
+                onChange={onFormChange}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -70,7 +101,7 @@ export const RegisterPage = () => {
 
           <Grid container spacing={2} sx={{ marginBottom: 2, marginTop: 2 }}>
             <Grid item xs={12}>
-              <Button variant="contained" fullWidth>
+              <Button type="submit" variant="contained" fullWidth>
                 Create account
               </Button>
             </Grid>

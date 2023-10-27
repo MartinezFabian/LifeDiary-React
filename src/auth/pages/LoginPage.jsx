@@ -1,3 +1,7 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link as LinkReactRouter } from 'react-router-dom';
+
 import { Google, Visibility, VisibilityOff } from '@mui/icons-material';
 import {
   Button,
@@ -11,12 +15,13 @@ import {
   Typography,
   Link,
 } from '@mui/material';
-import { useState } from 'react';
 
-import { Link as LinkReactRouter } from 'react-router-dom';
 import { AuthLayout } from '../layout/AuthLayout';
+import { checkingAuthentication } from '../../store/thunks/auth/checkingAuthentication';
 
 export const LoginPage = () => {
+  const dispatch = useDispatch();
+
   const [formState, setFormState] = useState({ email: '', password: '' });
 
   const onFormChange = (e) => {
@@ -31,7 +36,7 @@ export const LoginPage = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formState);
+    dispatch(checkingAuthentication());
   };
 
   const onGoogleSignIn = () => {

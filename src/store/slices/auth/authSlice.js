@@ -21,7 +21,7 @@ export const authSlice = createSlice({
       // Código reducer
     },
     checkingCredentials: (state) => {
-      // Código reducer
+      state.status = AUTH_STATUS.CHECKING;
     },
   },
 });

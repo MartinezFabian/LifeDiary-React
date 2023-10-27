@@ -18,6 +18,7 @@ import {
 
 import { AuthLayout } from '../layout/AuthLayout';
 import { checkingAuthentication } from '../../store/thunks/auth/checkingAuthentication';
+import { startGoogleSignIn } from '../../store/thunks/auth/startGoogleSignIn';
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ export const LoginPage = () => {
   };
 
   const onGoogleSignIn = () => {
-    console.log('Google Sign In');
+    dispatch(startGoogleSignIn());
   };
 
   const [showPassword, setShowPassword] = useState(false);

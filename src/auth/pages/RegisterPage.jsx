@@ -5,6 +5,7 @@ import { Link as LinkReactRouter } from 'react-router-dom';
 import {
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   IconButton,
   InputAdornment,
@@ -17,23 +18,17 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import { AuthLayout } from '../layout/AuthLayout';
+import { useRegisterFormValidation } from '../hooks/useRegisterFormValidation';
 
 export const RegisterPage = () => {
-  const [formState, setFormState] = useState({ fullName: '', email: '', password: '' });
-
-  const onFormChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
+  const { formState, onFormChange, errors, validateForm } = useRegisterFormValidation();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formState);
+    if (validateForm()) {
+      console.log(formState);
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -56,6 +51,8 @@ export const RegisterPage = () => {
               name="fullName"
               value={formState.fullName}
               onChange={onFormChange}
+              error={!!errors.fullName}
+              helperText={errors.fullName}
             />
           </Grid>
 
@@ -69,6 +66,8 @@ export const RegisterPage = () => {
               name="email"
               value={formState.email}
               onChange={onFormChange}
+              error={!!errors.email}
+              helperText={errors.email}
             />
           </Grid>
 
@@ -83,6 +82,7 @@ export const RegisterPage = () => {
                 name="password"
                 value={formState.password}
                 onChange={onFormChange}
+                error={!!errors.password}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -96,6 +96,7 @@ export const RegisterPage = () => {
                   </InputAdornment>
                 }
               />
+              <FormHelperText error={true}>{errors.password}</FormHelperText>
             </FormControl>
           </Grid>
 

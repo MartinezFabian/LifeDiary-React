@@ -19,15 +19,19 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import { AuthLayout } from '../layout/AuthLayout';
 import { useRegisterFormValidation } from '../hooks/useRegisterFormValidation';
+import { useDispatch } from 'react-redux';
+import { startRegisterUserWithEmailPassword } from '../../store/thunks/auth/startRegisterUserWithEmailPassword';
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch();
+
   const { formState, onFormChange, errors, validateForm } = useRegisterFormValidation();
 
   const onFormSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log(formState);
+      dispatch(startRegisterUserWithEmailPassword(formState));
     }
   };
 

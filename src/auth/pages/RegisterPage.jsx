@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Link as LinkReactRouter } from 'react-router-dom';
 
 import {
+  Alert,
   Button,
   FormControl,
   FormHelperText,
@@ -19,11 +20,15 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import { AuthLayout } from '../layout/AuthLayout';
 import { useRegisterFormValidation } from '../hooks/useRegisterFormValidation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { startRegisterUserWithEmailPassword } from '../../store/thunks/auth/startRegisterUserWithEmailPassword';
+import { AUTH_STATUS } from '../../store/slices/auth/authStatus';
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
+  const { status, errorMessage } = useSelector((state) => state.auth);
+
+  const isChecking = useMemo(() => status === AUTH_STATUS.CHECKING, [status]);
 
   const { formState, onFormChange, errors, validateForm } = useRegisterFormValidation();
 
@@ -105,8 +110,14 @@ export const RegisterPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ marginBottom: 2, marginTop: 2 }}>
+            {errorMessage ? (
+              <Grid item xs={12}>
+                <Alert severity="error">{errorMessage}</Alert>
+              </Grid>
+            ) : null}
+
             <Grid item xs={12}>
-              <Button type="submit" variant="contained" fullWidth>
+              <Button type="submit" disabled={isChecking} variant="contained" fullWidth>
                 Create account
               </Button>
             </Grid>

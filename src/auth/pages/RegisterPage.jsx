@@ -23,6 +23,7 @@ import { useRegisterFormValidation } from '../hooks/useRegisterFormValidation';
 import { useDispatch, useSelector } from 'react-redux';
 import { startRegisterUserWithEmailPassword } from '../../store/thunks/auth/startRegisterUserWithEmailPassword';
 import { AUTH_STATUS } from '../../store/slices/auth/authStatus';
+import { resetErrorMessage } from '../../store/slices/auth/authSlice';
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -125,7 +126,13 @@ export const RegisterPage = () => {
 
           <Grid container direction="row" justifyContent="end">
             <Typography marginRight={1}>Already have an account?</Typography>
-            <Link component={LinkReactRouter} color="inherit" underline="none" to="/auth/login">
+            <Link
+              component={LinkReactRouter}
+              color="inherit"
+              underline="none"
+              to="/auth/login"
+              onClick={() => dispatch(resetErrorMessage())}
+            >
               log in
             </Link>
           </Grid>

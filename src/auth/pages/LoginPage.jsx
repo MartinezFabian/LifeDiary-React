@@ -14,16 +14,18 @@ import {
   TextField,
   Typography,
   Link,
+  Alert,
 } from '@mui/material';
 
 import { AuthLayout } from '../layout/AuthLayout';
-import { checkingAuthentication } from '../../store/thunks/auth/checkingAuthentication';
-import { startGoogleSignIn } from '../../store/thunks/auth/startGoogleSignIn';
 
 import { AUTH_STATUS } from '../../store/slices/auth/authStatus';
+import { startGoogleSignIn } from '../../store/thunks/auth/startGoogleSignIn';
+import { startLoginUserWithEmailPassword } from '../../store/thunks/auth/startLoginUserWithEmailPassword';
+import { resetErrorMessage } from '../../store/slices/auth/authSlice';
 
 export const LoginPage = () => {
-  const { status } = useSelector((state) => state.auth);
+  const { status, errorMessage } = useSelector((state) => state.auth);
 
   const isAuthenticating = useMemo(() => status === AUTH_STATUS.CHECKING, [status]);
 
@@ -43,7 +45,7 @@ export const LoginPage = () => {
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(checkingAuthentication());
+    dispatch(startLoginUserWithEmailPassword(formState));
   };
 
   const onGoogleSignIn = () => {
@@ -103,6 +105,12 @@ export const LoginPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ marginBottom: 2, marginTop: 2 }}>
+            {errorMessage ? (
+              <Grid item xs={12}>
+                <Alert severity="error">{errorMessage}</Alert>
+              </Grid>
+            ) : null}
+
             <Grid item xs={12} sm={6}>
               <Button type="submit" disabled={isAuthenticating} variant="contained" fullWidth>
                 Login
@@ -127,6 +135,7 @@ export const LoginPage = () => {
               color="inherit"
               underline="none"
               to={'/auth/register'}
+              onClick={() => dispatch(resetErrorMessage())}
             >
               Create account
             </Link>

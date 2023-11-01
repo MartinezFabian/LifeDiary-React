@@ -1,7 +1,15 @@
 import { AppBar, Grid, IconButton, Toolbar, Typography } from '@mui/material';
 import { MenuOutlined, LogoutOutlined } from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { startLogout } from '../../store/thunks/auth/startLogout';
 
 export const Navbar = ({ drawerWidth, handleDrawerToggle }) => {
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    dispatch(startLogout());
+  };
+
   return (
     <AppBar
       color="primary"
@@ -27,7 +35,7 @@ export const Navbar = ({ drawerWidth, handleDrawerToggle }) => {
             LifeDiary
           </Typography>
 
-          <IconButton color="grey">
+          <IconButton onClick={onLogout} color="grey">
             <LogoutOutlined></LogoutOutlined>
           </IconButton>
         </Grid>

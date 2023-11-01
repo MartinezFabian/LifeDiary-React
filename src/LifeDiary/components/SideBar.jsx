@@ -14,14 +14,17 @@ import {
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import TurnedInNot from '@mui/icons-material/TurnedInNot';
+import { useSelector } from 'react-redux';
 
 export const SideBar = ({ drawerWidth, handleDrawerToggle, mobileOpen }) => {
+  const { displayName } = useSelector((state) => state.auth);
+
   const drawer = (
     <div>
       <Toolbar sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
         <AccountCircleIcon></AccountCircleIcon>
         <Typography variant="h6" component="h3" noWrap marginLeft={1}>
-          Fabian Martinez
+          {displayName}
         </Typography>
       </Toolbar>
       <Divider />

@@ -6,16 +6,16 @@ export const AppTheme = ({ children }) => {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#481f66',
+        main: '#072c4a',
       },
       secondary: {
-        main: '#543884',
+        main: '#0087db',
       },
       error: {
         main: red.A700,
       },
       grey: {
-        main: grey[200],
+        main: '#f0f8ff',
       },
     },
   });

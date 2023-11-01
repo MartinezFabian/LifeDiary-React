@@ -14,7 +14,7 @@ export const LifeDiaryLayout = ({ children }) => {
     setMobileOpen(!mobileOpen);
   };
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} className="animate__animated animate__fadeIn  animate__faster">
       <Navbar drawerWidth={drawerWidth} handleDrawerToggle={handleDrawerToggle}></Navbar>
 
       <SideBar

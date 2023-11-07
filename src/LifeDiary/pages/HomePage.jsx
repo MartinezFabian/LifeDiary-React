@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { startNewNote } from '../../store/thunks/lifeDiary/startNewNote';
 
 export const HomePage = () => {
-  const { isSaving } = useSelector((state) => state.lifeDiary);
+  const { isSaving, activeNote } = useSelector((state) => state.lifeDiary);
   const dispatch = useDispatch();
 
   const onAddNewNote = () => {
@@ -16,7 +16,7 @@ export const HomePage = () => {
 
   return (
     <LifeDiaryLayout>
-      <NothingSelectedView></NothingSelectedView>
+      {activeNote ? <NoteView></NoteView> : <NothingSelectedView></NothingSelectedView>}
 
       <Fab
         onClick={onAddNewNote}

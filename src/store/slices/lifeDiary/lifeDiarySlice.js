@@ -1,21 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isSaving: true,
+  isSaving: false,
   messageSaved: '',
   notes: [],
-  active: null,
+  activeNote: null,
 };
 
 export const lifeDiarySlice = createSlice({
   name: 'lifeDiary',
   initialState,
   reducers: {
-    addNewEmptyNote: () => {
-      // ...
+    savingNewNote: (state) => {
+      state.isSaving = true;
     },
-    setActiveNote: () => {
-      //...
+    addNewEmptyNote: (state, action) => {
+      state.notes.push(action.payload);
+      state.isSaving = false;
+    },
+    setActiveNote: (state, action) => {
+      state.activeNote = action.payload;
     },
     setNote: () => {
       //...
@@ -32,5 +36,12 @@ export const lifeDiarySlice = createSlice({
   },
 });
 
-export const { addNewEmptyNote, setActiveNote, setNote, setSaving, updateNote, deleteNoteById } =
-  lifeDiarySlice.actions;
+export const {
+  savingNewNote,
+  addNewEmptyNote,
+  setActiveNote,
+  setNote,
+  setSaving,
+  updateNote,
+  deleteNoteById,
+} = lifeDiarySlice.actions;

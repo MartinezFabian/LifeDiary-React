@@ -8,6 +8,7 @@ import { CheckingAuth } from '../ui/CheckingAuth';
 import { onAuthStateChanged } from 'firebase/auth';
 import { firebaseAuth } from '../firebase/config';
 import { login, logout } from '../store/slices/auth/authSlice';
+import { startLoadingNotes } from '../store/thunks/lifeDiary/startLoadingNotes';
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,8 @@ export const AppRouter = () => {
         const { uid, email, displayName, photoURL } = user;
 
         dispatch(login({ uid, email, displayName, photoURL }));
+
+        dispatch(startLoadingNotes());
       } else {
         dispatch(logout());
       }

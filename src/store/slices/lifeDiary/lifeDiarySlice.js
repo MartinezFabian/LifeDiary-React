@@ -21,8 +21,8 @@ export const lifeDiarySlice = createSlice({
     setActiveNote: (state, action) => {
       state.activeNote = action.payload;
     },
-    setNote: () => {
-      //...
+    setNotes: (state, action) => {
+      state.notes = action.payload;
     },
     setSaving: () => {
       // ...
@@ -40,7 +40,7 @@ export const {
   savingNewNote,
   addNewEmptyNote,
   setActiveNote,
-  setNote,
+  setNotes,
   setSaving,
   updateNote,
   deleteNoteById,

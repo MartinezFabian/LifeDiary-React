@@ -24,11 +24,17 @@ export const lifeDiarySlice = createSlice({
     setNotes: (state, action) => {
       state.notes = action.payload;
     },
-    setSaving: () => {
-      // ...
+    setSaving: (state) => {
+      state.isSaving = true;
     },
-    updateNote: () => {
-      // ...
+    updateNote: (state, action) => {
+      state.notes = state.notes.map((note) => {
+        if (note.id === action.payload.id) return action.payload;
+
+        return note;
+      });
+
+      state.isSaving = false;
     },
     deleteNoteById: () => {
       // ...

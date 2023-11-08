@@ -2,15 +2,22 @@ import { Save } from '@mui/icons-material';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { ImageGallery } from '../components/ImageGallery';
 import { useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setActiveNote } from '../../store/slices/lifeDiary/lifeDiarySlice';
+import { startSavingNote } from '../../store/thunks/lifeDiary/startSavingNote';
 
 export const NoteView = () => {
+  const dispatch = useDispatch();
   const { activeNote } = useSelector((state) => state.lifeDiary);
   const [formState, setFormState] = useState(activeNote);
 
   useEffect(() => {
     setFormState(activeNote);
   }, [activeNote]);
+
+  useEffect(() => {
+    dispatch(setActiveNote(formState));
+  }, [formState]);
 
   const onFormChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +26,10 @@ export const NoteView = () => {
       ...formState,
       [name]: value,
     });
+  };
+
+  const onSaveNote = () => {
+    dispatch(startSavingNote());
   };
 
   const dateString = useMemo(() => {
@@ -49,7 +60,7 @@ export const NoteView = () => {
         </Grid>
 
         <Grid item>
-          <Button variant="contained" startIcon={<Save></Save>}>
+          <Button onClick={onSaveNote} variant="contained" startIcon={<Save></Save>}>
             <Typography sx={{ marginLeft: 0.5 }}>Save</Typography>
           </Button>
         </Grid>

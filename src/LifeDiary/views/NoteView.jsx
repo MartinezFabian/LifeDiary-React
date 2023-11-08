@@ -1,8 +1,37 @@
 import { Save } from '@mui/icons-material';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { ImageGallery } from '../components/ImageGallery';
+import { useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export const NoteView = () => {
+  const { activeNote } = useSelector((state) => state.lifeDiary);
+  const [formState, setFormState] = useState(activeNote);
+
+  useEffect(() => {
+    setFormState(activeNote);
+  }, [activeNote]);
+
+  const onFormChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
+  const dateString = useMemo(() => {
+    const dateFormat = new Date(formState.date);
+
+    return dateFormat.toLocaleDateString('en-US', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    });
+  }, [formState.date]);
+
   return (
     <Grid
       container
@@ -15,7 +44,7 @@ export const NoteView = () => {
       <Grid container direction="row" justifyContent="space-around" alignItems="center" gap={2}>
         <Grid item>
           <Typography fontSize={26} fontWeight="light">
-            October 19, 2023
+            {dateString}
           </Typography>
         </Grid>
 
@@ -33,6 +62,9 @@ export const NoteView = () => {
           variant="outlined"
           fullWidth
           sx={{ backgroundColor: '#fff', marginBottom: 1 }}
+          name="title"
+          onChange={onFormChange}
+          value={formState.title}
         />
 
         <TextField
@@ -43,6 +75,9 @@ export const NoteView = () => {
           minRows={6}
           fullWidth
           sx={{ backgroundColor: '#fff', marginBottom: 1 }}
+          name="body"
+          onChange={onFormChange}
+          value={formState.body}
         />
       </Grid>
 

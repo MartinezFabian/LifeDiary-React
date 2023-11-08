@@ -1,20 +1,8 @@
-import {
-  Box,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Toolbar,
-  Drawer,
-  Typography,
-  Grid,
-} from '@mui/material';
+import { Box, Divider, Toolbar, Drawer, Typography } from '@mui/material';
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import TurnedInNot from '@mui/icons-material/TurnedInNot';
 import { useSelector } from 'react-redux';
+import { SideBarList } from './SideBarList';
 
 export const SideBar = ({ drawerWidth, handleDrawerToggle, mobileOpen }) => {
   const { displayName } = useSelector((state) => state.auth);
@@ -28,21 +16,7 @@ export const SideBar = ({ drawerWidth, handleDrawerToggle, mobileOpen }) => {
         </Typography>
       </Toolbar>
       <Divider />
-      <List>
-        {['Example1', 'Example2', 'Example3', 'Example4'].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>{<TurnedInNot></TurnedInNot>}</ListItemIcon>
-              <Grid container>
-                <ListItemText primary={text} />
-                <ListItemText
-                  secondary={'Lorem ipsum dolor sit amet consectetur adipisicing elit.'}
-                ></ListItemText>
-              </Grid>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <SideBarList></SideBarList>
     </div>
   );
 

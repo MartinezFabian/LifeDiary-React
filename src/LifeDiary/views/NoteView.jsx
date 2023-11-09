@@ -1,4 +1,3 @@
-import { Save } from '@mui/icons-material';
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { ImageGallery } from '../components/ImageGallery';
 import { useEffect, useMemo, useState } from 'react';
@@ -60,7 +59,7 @@ export const NoteView = () => {
         </Grid>
 
         <Grid item>
-          <Button onClick={onSaveNote} variant="contained" startIcon={<Save></Save>}>
+          <Button onClick={onSaveNote} color="primary" size="large" variant="contained">
             <Typography sx={{ marginLeft: 0.5 }}>Save</Typography>
           </Button>
         </Grid>
@@ -72,7 +71,7 @@ export const NoteView = () => {
           label="Title"
           variant="outlined"
           fullWidth
-          sx={{ backgroundColor: '#fff', marginBottom: 1 }}
+          sx={{ marginBottom: 1 }}
           name="title"
           onChange={onFormChange}
           value={formState.title}
@@ -85,7 +84,7 @@ export const NoteView = () => {
           multiline
           minRows={6}
           fullWidth
-          sx={{ backgroundColor: '#fff', marginBottom: 1 }}
+          sx={{ marginBottom: 1 }}
           name="body"
           onChange={onFormChange}
           value={formState.body}

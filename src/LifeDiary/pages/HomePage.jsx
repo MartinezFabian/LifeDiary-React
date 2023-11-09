@@ -22,7 +22,7 @@ export const HomePage = () => {
         onClick={onAddNewNote}
         disabled={isSaving}
         size="large"
-        color="secondary"
+        color="primary"
         aria-label="add"
         sx={{ position: 'fixed', right: 50, bottom: 50 }}
       >

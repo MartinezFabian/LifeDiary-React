@@ -30,7 +30,6 @@ export const LifeDiaryLayout = ({ children }) => {
           padding: 0,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           minHeight: '100vh',
-          backgroundColor: 'grey.main',
         }}
       >
         <Toolbar />

@@ -1,4 +1,4 @@
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { Alert, Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
 import { ImageGallery } from '../components/ImageGallery';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,8 +7,9 @@ import { startSavingNote } from '../../store/thunks/lifeDiary/startSavingNote';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
-  const { activeNote } = useSelector((state) => state.lifeDiary);
+  const { activeNote, messageSaved } = useSelector((state) => state.lifeDiary);
   const [formState, setFormState] = useState(activeNote);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
     setFormState(activeNote);
@@ -17,6 +18,12 @@ export const NoteView = () => {
   useEffect(() => {
     dispatch(setActiveNote(formState));
   }, [formState]);
+
+  useEffect(() => {
+    if (messageSaved.length > 0) {
+      setShowSuccessMessage(true);
+    }
+  }, [messageSaved]);
 
   const onFormChange = (e) => {
     const { name, value } = e.target;
@@ -92,6 +99,18 @@ export const NoteView = () => {
       </Grid>
 
       <ImageGallery></ImageGallery>
+
+      <Snackbar
+        open={showSuccessMessage}
+        autoHideDuration={3500}
+        onClose={() => setShowSuccessMessage(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        variant="filled"
+      >
+        <Alert severity="success" sx={{ width: '100%' }}>
+          {messageSaved}
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

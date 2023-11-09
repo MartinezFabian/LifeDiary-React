@@ -20,12 +20,16 @@ export const lifeDiarySlice = createSlice({
     },
     setActiveNote: (state, action) => {
       state.activeNote = action.payload;
+
+      state.messageSaved = '';
     },
     setNotes: (state, action) => {
       state.notes = action.payload;
     },
     setSaving: (state) => {
       state.isSaving = true;
+
+      state.messageSaved = '';
     },
     updateNote: (state, action) => {
       state.notes = state.notes.map((note) => {
@@ -35,6 +39,7 @@ export const lifeDiarySlice = createSlice({
       });
 
       state.isSaving = false;
+      state.messageSaved = `${action.payload.title} was successfully updated!`;
     },
     deleteNoteById: () => {
       // ...

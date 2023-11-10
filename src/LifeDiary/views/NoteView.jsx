@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setActiveNote } from '../../store/slices/lifeDiary/lifeDiarySlice';
 import { startSavingNote } from '../../store/thunks/lifeDiary/startSavingNote';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { startUploadingFiles } from '../../store/thunks/lifeDiary/startUploadingFiles';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -53,7 +54,7 @@ export const NoteView = () => {
   const onFileInputChange = (e) => {
     if (e.target.files === 0) return;
 
-    console.log(e.target.files);
+    dispatch(startUploadingFiles(e.target.files));
   };
 
   return (
@@ -65,29 +66,38 @@ export const NoteView = () => {
       padding={2}
       sx={{ maxWidth: '1000px', margin: '50px auto' }}
     >
-      <Grid container direction="row" justifyContent="space-around" alignItems="center" gap={2}>
+      <Grid container direction="row" justifyContent="space-between" alignItems="center" gap={2}>
         <Grid item>
-          <Typography fontSize={26} fontWeight="light">
+          <Typography fontSize={24} fontWeight="light">
             {dateString}
           </Typography>
         </Grid>
 
-        <Grid item>
-          <Button
-            disabled={isSaving}
-            component="label"
-            variant="contained"
-            startIcon={<CloudUploadIcon />}
-          >
-            Upload files
-            <input type="file" onChange={onFileInputChange} multiple hidden />
-          </Button>
-        </Grid>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          gap={2}
+          maxWidth={300}
+        >
+          <Grid item>
+            <Button
+              disabled={isSaving}
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+            >
+              Upload files
+              <input type="file" onChange={onFileInputChange} multiple hidden />
+            </Button>
+          </Grid>
 
-        <Grid item>
-          <Button onClick={onSaveNote} disabled={isSaving} color="primary" variant="contained">
-            <Typography sx={{ marginLeft: 0.5 }}>Save</Typography>
-          </Button>
+          <Grid item>
+            <Button onClick={onSaveNote} disabled={isSaving} color="primary" variant="contained">
+              Save
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
 

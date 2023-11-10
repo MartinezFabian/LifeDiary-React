@@ -1,13 +1,14 @@
-import { Alert, Button, Grid, Snackbar, TextField, Typography } from '@mui/material';
+import { Alert, Button, Grid, IconButton, Snackbar, TextField, Typography } from '@mui/material';
 import { ImageGallery } from '../components/ImageGallery';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setActiveNote } from '../../store/slices/lifeDiary/lifeDiarySlice';
 import { startSavingNote } from '../../store/thunks/lifeDiary/startSavingNote';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
-  const { activeNote, messageSaved } = useSelector((state) => state.lifeDiary);
+  const { activeNote, messageSaved, isSaving } = useSelector((state) => state.lifeDiary);
   const [formState, setFormState] = useState(activeNote);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
@@ -49,6 +50,12 @@ export const NoteView = () => {
     });
   }, [formState.date]);
 
+  const onFileInputChange = (e) => {
+    if (e.target.files === 0) return;
+
+    console.log(e.target.files);
+  };
+
   return (
     <Grid
       container
@@ -66,7 +73,19 @@ export const NoteView = () => {
         </Grid>
 
         <Grid item>
-          <Button onClick={onSaveNote} color="primary" size="large" variant="contained">
+          <Button
+            disabled={isSaving}
+            component="label"
+            variant="contained"
+            startIcon={<CloudUploadIcon />}
+          >
+            Upload files
+            <input type="file" onChange={onFileInputChange} multiple hidden />
+          </Button>
+        </Grid>
+
+        <Grid item>
+          <Button onClick={onSaveNote} disabled={isSaving} color="primary" variant="contained">
             <Typography sx={{ marginLeft: 0.5 }}>Save</Typography>
           </Button>
         </Grid>

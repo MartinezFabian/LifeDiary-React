@@ -44,6 +44,10 @@ export const lifeDiarySlice = createSlice({
     deleteNoteById: () => {
       // ...
     },
+    setImagesToActiveNote: (state, action) => {
+      state.activeNote.imagesUrls = [...state.activeNote.imagesUrls, ...action.payload];
+      state.isSaving = false;
+    },
   },
 });
 
@@ -55,4 +59,5 @@ export const {
   setSaving,
   updateNote,
   deleteNoteById,
+  setImagesToActiveNote,
 } = lifeDiarySlice.actions;

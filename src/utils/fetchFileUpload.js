@@ -18,9 +18,7 @@ export async function fetchFileUpload(file) {
     if (response.ok) {
       const data = await response.json();
 
-      console.log(data);
-
-      return data;
+      return data.secure_url;
     } else {
       console.error(response.statusText);
     }

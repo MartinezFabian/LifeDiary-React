@@ -19,6 +19,7 @@ export const startNewNote = () => {
         title: '',
         body: '',
         date: new Date().getTime(),
+        imagesUrls: [],
       };
 
       const newDocument = doc(collection(firestoreDB, `${uid}/lifeDiary/notes`));

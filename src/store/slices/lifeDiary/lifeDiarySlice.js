@@ -48,6 +48,12 @@ export const lifeDiarySlice = createSlice({
       state.activeNote.imagesUrls = [...state.activeNote.imagesUrls, ...action.payload];
       state.isSaving = false;
     },
+    clearNotesLogout: (state) => {
+      state.isSaving = false;
+      state.messageSaved = '';
+      state.notes = [];
+      state.activeNote = null;
+    },
   },
 });
 
@@ -60,4 +66,5 @@ export const {
   updateNote,
   deleteNoteById,
   setImagesToActiveNote,
+  clearNotesLogout,
 } = lifeDiarySlice.actions;

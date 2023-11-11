@@ -6,6 +6,8 @@ import { setActiveNote } from '../../store/slices/lifeDiary/lifeDiarySlice';
 import { startSavingNote } from '../../store/thunks/lifeDiary/startSavingNote';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { startUploadingFiles } from '../../store/thunks/lifeDiary/startUploadingFiles';
+import AlertDialog from '../components/AlertDialog';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -57,6 +59,20 @@ export const NoteView = () => {
     dispatch(startUploadingFiles(e.target.files));
   };
 
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const onOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const onCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const onDeleteNote = () => {
+    console.log('Eliminar nota activa...');
+  };
+
   return (
     <Grid
       container
@@ -79,7 +95,7 @@ export const NoteView = () => {
           justifyContent="space-between"
           alignItems="center"
           gap={2}
-          maxWidth={300}
+          maxWidth={500}
         >
           <Grid item>
             <Button
@@ -97,6 +113,26 @@ export const NoteView = () => {
             <Button onClick={onSaveNote} disabled={isSaving} color="primary" variant="contained">
               Save
             </Button>
+          </Grid>
+
+          <Grid item>
+            <Button
+              onClick={onOpenDialog}
+              disabled={isSaving}
+              color="error"
+              variant="contained"
+              startIcon={<DeleteIcon></DeleteIcon>}
+            >
+              Delete note
+            </Button>
+
+            <AlertDialog
+              title="Are you sure you want to delete the note?"
+              description="This action cannot be undone."
+              onAgree={onDeleteNote}
+              open={openDialog}
+              onClose={onCloseDialog}
+            />
           </Grid>
         </Grid>
       </Grid>

@@ -41,8 +41,11 @@ export const lifeDiarySlice = createSlice({
       state.isSaving = false;
       state.messageSaved = `${action.payload.title} was successfully updated!`;
     },
-    deleteNoteById: () => {
-      // ...
+    deleteNoteById: (state, action) => {
+      state.notes = state.notes.filter((note) => note.id !== action.payload);
+
+      state.activeNote = null;
+      state.isSaving = false;
     },
     setImagesToActiveNote: (state, action) => {
       state.activeNote.imagesUrls = [...state.activeNote.imagesUrls, ...action.payload];

@@ -8,6 +8,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { startUploadingFiles } from '../../store/thunks/lifeDiary/startUploadingFiles';
 import AlertDialog from '../components/AlertDialog';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { startDeletingNote } from '../../store/thunks/lifeDiary/startDeletingNote';
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ export const NoteView = () => {
   };
 
   const onDeleteNote = () => {
-    console.log('Eliminar nota activa...');
+    dispatch(startDeletingNote());
   };
 
   return (
@@ -95,20 +96,8 @@ export const NoteView = () => {
           justifyContent="space-between"
           alignItems="center"
           gap={2}
-          maxWidth={500}
+          maxWidth={240}
         >
-          <Grid item>
-            <Button
-              disabled={isSaving}
-              component="label"
-              variant="contained"
-              startIcon={<CloudUploadIcon />}
-            >
-              Upload files
-              <input type="file" onChange={onFileInputChange} multiple hidden />
-            </Button>
-          </Grid>
-
           <Grid item>
             <Button onClick={onSaveNote} disabled={isSaving} color="primary" variant="contained">
               Save
@@ -161,6 +150,18 @@ export const NoteView = () => {
           onChange={onFormChange}
           value={formState.body}
         />
+      </Grid>
+
+      <Grid container justifyContent="end">
+        <Button
+          disabled={isSaving}
+          component="label"
+          variant="contained"
+          startIcon={<CloudUploadIcon />}
+        >
+          Upload files
+          <input type="file" onChange={onFileInputChange} multiple hidden />
+        </Button>
       </Grid>
 
       <ImageGallery></ImageGallery>

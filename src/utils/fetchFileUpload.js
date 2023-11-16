@@ -1,7 +1,11 @@
+import { getEnvironments } from './getEnvironments';
+
 export async function fetchFileUpload(file) {
   if (!file) throw new Error('Error: no file to upload');
 
-  const cloudinaryCloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+  const { VITE_CLOUDINARY_CLOUD_NAME } = getEnvironments();
+
+  const cloudinaryCloudName = VITE_CLOUDINARY_CLOUD_NAME;
 
   const cloudinaryUrl = `https://api.cloudinary.com/v1_1/${cloudinaryCloudName}/upload`;
 

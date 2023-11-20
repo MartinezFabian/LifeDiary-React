@@ -8,6 +8,8 @@ import { testUser } from '../../../fixtures/authFixtures';
 jest.mock('../../../../src/firebase/providers');
 
 describe('tests in startGoogleSignIn.js', () => {
+  beforeEach(() => jest.clearAllMocks());
+
   test('must call checkingCredentials and login', async () => {
     const dispatch = jest.fn();
 

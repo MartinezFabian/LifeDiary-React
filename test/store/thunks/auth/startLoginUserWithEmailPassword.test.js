@@ -8,6 +8,8 @@ import { testUser } from '../../../fixtures/authFixtures';
 jest.mock('../../../../src/firebase/providers');
 
 describe('tests in startLoginUserWithEmailPassword.js', () => {
+  beforeEach(() => jest.clearAllMocks());
+
   const dispatch = jest.fn();
 
   test('must call checkingCredentials and login', async () => {

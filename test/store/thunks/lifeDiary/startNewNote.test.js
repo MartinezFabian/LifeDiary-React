@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 import { collection, deleteDoc, getDocs } from 'firebase/firestore/lite';
 import { firestoreDB } from '../../../../src/firebase/config';
 import {
@@ -7,7 +9,6 @@ import {
 } from '../../../../src/store/slices/lifeDiary/lifeDiarySlice';
 import { startNewNote } from '../../../../src/store/thunks/lifeDiary/startNewNote';
 
-/* eslint-disable no-undef */
 describe('tests in startNewNote.js', () => {
   const dispatch = jest.fn();
   const getState = jest.fn();

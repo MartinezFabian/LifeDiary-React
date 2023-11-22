@@ -122,6 +122,7 @@ export const LoginPage = () => {
                 disabled={isAuthenticating}
                 variant="contained"
                 fullWidth
+                aria-label="google-btn"
               >
                 <Google></Google>
                 <Typography sx={{ marginLeft: 1 }}>Google</Typography>

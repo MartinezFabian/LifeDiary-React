@@ -62,7 +62,7 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Login">
-      <form onSubmit={onFormSubmit}>
+      <form onSubmit={onFormSubmit} aria-label="submit-form">
         <Grid container>
           <Grid item xs={12} sx={{ marginTop: 2 }}>
             <TextField
@@ -88,6 +88,9 @@ export const LoginPage = () => {
                 name="password"
                 onChange={onFormChange}
                 value={formState.password}
+                inputProps={{
+                  'aria-label': 'password-input',
+                }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
